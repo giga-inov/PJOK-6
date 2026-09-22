@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PETUALANGAN PJOK KELAS 6 - Giga Inovation</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter & Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #0284c7 50%, #0d9488 100%);
+            min-height: 100vh;
+        }
+        .sport-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        @keyframes bounce-slow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-bounce-slow {
+            animation: bounce-slow 3s infinite ease-in-out;
+        }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 15px rgba(59, 130, 246, 0.5); }
+            50% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.9); }
+        }
+        .pulse-glow {
+            animation: pulse-glow 2s infinite;
+        }
+        /* Hide scrollbar for clean UI */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="text-slate-800 flex flex-col min-h-screen justify-between p-3 sm:p-6">
+
+    <div id="app" class="max-w-4xl w-full mx-auto flex flex-col flex-grow justify-center">
+
+        <!-- ================= PAGE 1: SPLASH & NAME INPUT ================= -->
+        <div id="page-welcome" class="sport-card rounded-3xl shadow-2xl p-6 sm:p-10 text-center relative overflow-hidden border-4 border-cyan-400">
+            <!-- Decorative sport background elements -->
+            <div class="absolute -top-10 -left-10 w-32 h-32 bg-cyan-200 rounded-full opacity-30 pointer-events-none"></div>
+            <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-blue-300 rounded-full opacity-30 pointer-events-none"></div>
+
+            <div class="inline-block bg-cyan-500 text-white text-xs sm:text-sm font-extxl font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-4 shadow-md">
+                <i class="fa-solid fa-graduation-cap mr-2"></i>Kurikulum Merdeka / SD-MI Semester 1
+            </div>
+
+            <h1 class="text-3xl sm:text-5xl font-black text-blue-900 tracking-tight mb-2 uppercase drop-shadow-sm">
+                🏆 PETUALANGAN PJOK
+            </h1>
+            <p class="text-base sm:text-xl font-bold text-cyan-700 mb-6">
+                PJOK Kelas 6 SD/MI – Semester 1
+            </p>
+
+            <!-- Mascot Character -->
+            <div class="flex justify-center items-center mb-6">
+                <div class="w-28 h-28 sm:w-36 sm:h-36 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center shadow-xl border-4 border-white animate-bounce-slow">
+                    <i class="fa-solid fa-running text-5xl sm:text-6xl text-white"></i>
+                </div>
+            </div>
+
+            <div class="bg-blue-50 border-2 border-blue-200 p-4 sm:p-6 rounded-2xl max-w-md mx-auto mb-6 shadow-inner">
+                <p class="text-sm sm:text-base font-semibold text-blue-900 mb-3">
+                    Halo! Aku <span class="text-orange-600 font-bold">Leo</span>, sang Atlet Muda. Masukkan nama kamu untuk memulai petualangan seru ini!
+                </p>
+                <input type="text" id="student-name-input" placeholder="Masukkan Nama Kamu..." class="w-full px-4 py-3 text-center text-lg font-bold rounded-xl border-2 border-cyan-500 focus:outline-none focus:ring-4 focus:ring-cyan-300 shadow-sm" autofocus>
+            </div>
+
+            <button onclick="startAdventure()" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-extrabold text-lg sm:text-xl rounded-2xl shadow-lg transform transition active:scale-95 flex items-center justify-center mx-auto gap-3 cursor-pointer">
+                <i class="fa-solid fa-person-running text-2xl"></i> 🏃 MULAI PETUALANGAN
+            </button>
+        </div>
+
+        <!-- ================= PAGE 2: INSTRUCTIONS & MAP ================= -->
+        <div id="page-map" class="hidden sport-card rounded-3xl shadow-2xl p-5 sm:p-8 border-4 border-blue-400">
+            <div class="flex flex-col sm:flex-row justify-between items-center mb-6 border-b pb-4 gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-amber-500 text-white rounded-xl flex items-center justify-center text-xl font-bold shadow-md">
+                        <i class="fa-solid fa-user-athlete"></i>
+                    </div>
+                    <div>
+                        <h2 id="greeting-text" class="text-lg sm:text-2xl font-black text-blue-950">Halo, Atlet!</h2>
+                        <p class="text-xs sm:text-sm text-slate-600">Pilih level atau baca materi untuk memulai latihan.</p>
+                    </div>
+                </div>
+                <div class="bg-cyan-100 px-4 py-2 rounded-xl border border-cyan-300 text-cyan-900 font-bold text-sm">
+                    <i class="fa-solid fa-trophy text-amber-500 mr-2"></i>Total 50 Soal Tantangan
+                </div>
+            </div>
+
+            <!-- Instructions Box -->
+            <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-xl mb-6 text-sm text-amber-900">
+                <h3 class="font-extrabold text-base mb-1"><i class="fa-solid fa-circle-info mr-2"></i>Petunjuk Petualangan:</h3>
+                <ul class="list-disc list-inside space-y-1 text-xs sm:text-sm">
+                    <li>Pelajari materi Bab 1, Bab 2, dan Bab 3 terlebih dahulu.</li>
+                    <li>Jelajahi 3 dunia olahraga penuh tantangan dan kuis interaktif.</li>
+                    <li>Kerjakan 50 soal pilihan ganda (20 poin per soal benar).</li>
+                    <li>Bisa kembali ke materi kapan saja tanpa kehilangan skor/progress!</li>
+                </ul>
+            </div>
+
+            <!-- Adventure Map Grid -->
+            <h3 class="text-center font-black text-blue-900 text-lg sm:text-xl mb-4 uppercase tracking-wider">🗺️ Peta Petualangan Olahraga</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <!-- Dunia 1 -->
+                <div onclick="openChapter(1)" class="bg-gradient-to-br from-blue-500 to-indigo-600 text-white p-5 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1 cursor-pointer border-2 border-blue-300 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="bg-amber-400 text-blue-950 text-xs font-extrabold px-3 py-1 rounded-full">LEVEL 1</span>
+                            <i class="fa-solid fa-person-walking text-2xl text-cyan-200"></i>
+                        </div>
+                        <h4 class="font-black text-lg mb-1">🏃 EKSPLORASI GERAK</h4>
+                        <p class="text-xs text-blue-100 mb-4">Variasi dan kombinasi gerak dasar dalam berbagai permainan.</p>
+                    </div>
+                    <div class="bg-white/20 text-center py-2 rounded-xl text-xs font-bold backdrop-blur-sm">
+                        <i class="fa-solid fa-book-open mr-1"></i> Buka Materi & Latihan (17 Soal)
+                    </div>
+                </div>
+
+                <!-- Dunia 2 -->
+                <div onclick="openChapter(2)" class="bg-gradient-to-br from-emerald-500 to-teal-600 text-white p-5 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1 cursor-pointer border-2 border-emerald-300 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="bg-amber-400 text-blue-950 text-xs font-extrabold px-3 py-1 rounded-full">LEVEL 2</span>
+                            <i class="fa-solid fa-chess text-2xl text-emerald-200"></i>
+                        </div>
+                        <h4 class="font-black text-lg mb-1">🧠 BERPIKIR CERDAS, BERGERAK TAKTIS</h4>
+                        <p class="text-xs text-emerald-100 mb-4">Strategi, taktik, dan pengambilan keputusan dalam permainan.</p>
+                    </div>
+                    <div class="bg-white/20 text-center py-2 rounded-xl text-xs font-bold backdrop-blur-sm">
+                        <i class="fa-solid fa-book-open mr-1"></i> Buka Materi & Latihan (16 Soal)
+                    </div>
+                </div>
+
+                <!-- Dunia 3 -->
+                <div onclick="openChapter(3)" class="bg-gradient-to-br from-purple-600 to-pink-600 text-white p-5 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1 cursor-pointer border-2 border-purple-300 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="bg-amber-400 text-blue-950 text-xs font-extrabold px-3 py-1 rounded-full">LEVEL 3</span>
+                            <i class="fa-solid fa-award text-2xl text-purple-200"></i>
+                        </div>
+                        <h4 class="font-black text-lg mb-1">🏆 ATURAN BARU, PERMAINAN SERU</h4>
+                        <p class="text-xs text-purple-100 mb-4">Modifikasi aturan, sportifitas, dan keseruan pertandingan.</p>
+                    </div>
+                    <div class="bg-white/20 text-center py-2 rounded-xl text-xs font-bold backdrop-blur-sm">
+                        <i class="fa-solid fa-book-open mr-1"></i> Buka Materi & Latihan (17 Soal)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Button to Start Quiz direkt -->
+            <div class="text-center">
+                <button onclick="startQuizFromBeginning()" class="px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white font-extrabold text-lg rounded-2xl shadow-lg transform transition active:scale-95 flex items-center justify-center mx-auto gap-3 cursor-pointer">
+                    <i class="fa-solid fa-play text-xl"></i> 🚀 MULAI KUIS 50 SOAL SEKARANG
+                </button>
+            </div>
+        </div>
+
+        <!-- ================= PAGE 3: MATERI PEMBELAJARAN ================= -->
+        <div id="page-materi" class="hidden sport-card rounded-3xl shadow-2xl p-6 sm:p-8 border-4 border-emerald-400">
+            <div class="flex justify-between items-center mb-6 border-b pb-4">
+                <div class="flex items-center gap-3">
+                    <div id="materi-icon-box" class="w-10 h-10 bg-emerald-500 text-white rounded-xl flex items-center justify-center font-bold">
+                        <i class="fa-solid fa-book"></i>
+                    </div>
+                    <h2 id="materi-title" class="text-xl sm:text-2xl font-black text-blue-950">Materi Pembelajaran</h2>
+                </div>
+                <button onclick="backToMap()" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 font-bold rounded-xl text-slate-700 text-sm transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Kembali ke Peta
+                </button>
+            </div>
+
+            <!-- Materi Content Container -->
+            <div id="materi-content-box" class="space-y-4 text-sm sm:text-base text-slate-700 mb-8 max-h-[60vh] overflow-y-auto pr-2">
+                <!-- Dynamically populated -->
+            </div>
+
+            <div class="text-center border-t pt-4">
+                <button onclick="resumeQuiz()" id="btn-resume-quiz" class="px-8 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-extrabold rounded-xl shadow-lg flex items-center justify-center mx-auto gap-2 cursor-pointer">
+                    <i class="fa-solid fa-rotate-left"></i> ↩ KEMBALI KE KUIS
+                </button>
+            </div>
+        </div>
+
+        <!-- ================= PAGE 4: KUIS INTERAKTIF ================= -->
+        <div id="page-quiz" class="hidden sport-card rounded-3xl shadow-2xl p-5 sm:p-8 border-4 border-cyan-500">
+            <!-- Top Bar Stats -->
+            <div class="flex flex-wrap justify-between items-center mb-4 bg-blue-50 p-3 rounded-2xl border border-blue-200 gap-2 text-xs sm:text-sm font-bold text-blue-900">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-bookmark text-cyan-600"></i>
+                    <span id="quiz-progress-text">SOAL 1 DARI 50</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-user-shield text-emerald-600"></i>
+                    <span id="quiz-name-display">Atlet</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-star text-amber-500"></i>
+                    <span>Skor: <strong id="quiz-score-display" class="text-orange-600 text-base">0</strong></span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-layer-group text-purple-600"></i>
+                    <span id="quiz-level-display">Bab 1</span>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="w-full bg-slate-200 h-3 rounded-full mb-6 overflow-hidden shadow-inner">
+                <div id="quiz-progress-bar" class="bg-gradient-to-r from-cyan-500 to-blue-600 h-full w-[2%] transition-all duration-300"></div>
+            </div>
+
+            <!-- Question Box -->
+            <div class="mb-6">
+                <div class="flex justify-between items-center mb-2">
+                    <span id="question-difficulty-badge" class="bg-cyan-100 text-cyan-800 text-xs font-extrabold px-3 py-1 rounded-full">🟢 Mudah</span>
+                    <button onclick="openMateriFromQuiz()" class="text-xs font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 px-3 py-1 rounded-lg border border-blue-200 transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-book-open"></i> 📚 KEMBALI KE MATERI
+                    </button>
+                </div>
+                <h3 id="question-text" class="text-lg sm:text-xl font-extrabold text-slate-900 mb-4 leading-snug">
+                    Pertanyaan akan muncul di sini...
+                </h3>
+
+                <!-- Optional Question Image Simulation -->
+                <div id="question-image-container" class="hidden mb-4 bg-slate-100 rounded-2xl p-4 text-center border border-slate-300">
+                    <div class="w-full h-36 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-xl flex items-center justify-center text-white font-bold shadow-md">
+                        <i id="question-icon-ill" class="fa-solid fa-person-running text-4xl mr-3"></i>
+                        <span id="question-img-label" class="text-sm sm:text-base">Ilustrasi Situasi / Gerakan Olahraga</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Options Grid -->
+            <div id="options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                <!-- Dynamically generated option buttons -->
+            </div>
+
+            <!-- Feedback & Explanation Box (Hidden initially) -->
+            <div id="feedback-box" class="hidden rounded-2xl p-4 mb-4 border-2">
+                <div id="feedback-header" class="font-extrabold text-base mb-1 flex items-center gap-2">
+                    <!-- Icon + Benar/Salah -->
+                </div>
+                <p id="feedback-explanation" class="text-xs sm:text-sm text-slate-700 leading-relaxed mb-4">
+                    <!-- Explanation text -->
+                </p>
+                <button onclick="nextQuestion()" id="btn-next-question" class="w-full py-3 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-extrabold rounded-xl shadow-lg transition flex items-center justify-center gap-2 cursor-pointer">
+                    ➡ LANJUT KE SOAL BERIKUTNYA
+                </button>
+            </div>
+        </div>
+
+        <!-- ================= PAGE 5: HASIL AKHIR & SERTIFIKAT ================= -->
+        <div id="page-result" class="hidden sport-card rounded-3xl shadow-2xl p-6 sm:p-10 text-center border-4 border-amber-400">
+            <div class="inline-block bg-amber-400 text-blue-950 font-extrabold text-xs sm:text-sm px-4 py-1.5 rounded-full uppercase mb-4 shadow-md">
+                🎉 PETUALANGAN SELESAI! 🎉
+            </div>
+
+            <h2 id="result-congrats" class="text-2xl sm:text-4xl font-black text-blue-950 mb-2">Selamat, Atlet!</h2>
+            <p id="result-category-title" class="text-lg sm:text-xl font-extrabold text-orange-600 mb-6 uppercase tracking-wider">🏆 JUARA PJOK</p>
+
+            <div class="bg-blue-50 border-2 border-blue-200 p-6 rounded-2xl max-w-md mx-auto mb-6 shadow-inner grid grid-cols-2 gap-4 text-center">
+                <div class="bg-white p-3 rounded-xl shadow-sm border border-blue-100">
+                    <span class="block text-xs text-slate-500 font-bold mb-1">SKOR AKHIR</span>
+                    <span id="res-score" class="text-2xl sm:text-3xl font-black text-blue-900">1000</span>
+                    <span class="text-xs text-slate-400 block">/ 1000</span>
+                </div>
+                <div class="bg-white p-3 rounded-xl shadow-sm border border-blue-100">
+                    <span class="block text-xs text-slate-500 font-bold mb-1">JAWABAN BENAR</span>
+                    <span id="res-correct" class="text-2xl sm:text-3xl font-black text-emerald-600">50</span>
+                    <span class="text-xs text-slate-400 block">dari 50 soal</span>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-4 mb-6">
+                <button onclick="openCertificateModal()" class="px-6 py-4 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white font-extrabold text-base rounded-2xl shadow-lg transform transition active:scale-95 flex items-center justify-center gap-2 cursor-pointer">
+                    <i class="fa-solid fa-award text-xl"></i> 🏆 LIHAT SERTIFIKAT
+                </button>
+                <button onclick="restartQuiz()" class="px-6 py-4 bg-gradient-to-r from-slate-700 to-slate-900 hover:from-slate-800 hover:to-black text-white font-extrabold text-base rounded-2xl shadow-lg transform transition active:scale-95 flex items-center justify-center gap-2 cursor-pointer">
+                    <i class="fa-solid fa-rotate-right"></i> 🔄 ULANGI KUIS
+                </button>
+            </div>
+        </div>
+
+        <!-- ================= MODAL SERTIFIKAT DIGITAL ================= -->
+        <div id="modal-certificate" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+            <div class="bg-white rounded-3xl shadow-2xl max-w-2xl w-full p-6 sm:p-10 border-8 border-amber-400 relative text-center">
+                <!-- Close Button -->
+                <button onclick="closeCertificateModal()" class="absolute top-4 right-4 w-10 h-10 bg-slate-200 hover:bg-slate-300 rounded-full font-bold text-slate-700 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+                <!-- Certificate Header -->
+                <div class="border-b-4 border-amber-400 pb-4 mb-4">
+                    <div class="text-xs sm:text-sm font-extrabold text-blue-900 uppercase tracking-widest mb-1">Giga Inovation • Sertifikat Resmi Pendidikan</div>
+                    <h2 class="text-2xl sm:text-4xl font-black text-blue-950 uppercase">SERTIFIKAT PENGHARGAAN</h2>
+                    <p class="text-xs sm:text-sm text-slate-600 mt-1">Diberikan dengan bangga kepada:</p>
+                </div>
+
+                <!-- Recipient Name -->
+                <h3 id="cert-student-name" class="text-2xl sm:text-4xl font-black text-orange-600 underline decoration-cyan-500 decoration-4 underline-offset-8 my-4">
+                    [NAMA SISWA]
+                </h3>
+
+                <p class="text-xs sm:text-base text-slate-700 max-w-lg mx-auto mb-6 leading-relaxed">
+                    Atas keberhasilannya menyelesaikan seluruh tantangan materi dan 50 soal uji kompetensi dalam game edukatif interaktif:
+                </p>
+
+                <div class="bg-blue-50 border-2 border-blue-200 py-3 px-6 rounded-2xl inline-block mb-6 shadow-inner">
+                    <h4 class="font-extrabold text-blue-950 text-base sm:text-lg">"PETUALANGAN PJOK KELAS 6 SD/MI"</h4>
+                    <p class="text-xs text-slate-600 mt-1">Semester 1 (Bab 1, Bab 2, dan Bab 3)</p>
+                </div>
+
+                <!-- Score and Stats in Cert -->
+                <div class="grid grid-cols-2 gap-4 max-w-sm mx-auto mb-6 text-sm">
+                    <div class="bg-amber-50 p-3 rounded-xl border border-amber-200">
+                        <span class="block text-xs text-amber-800 font-bold">Skor Total</span>
+                        <span id="cert-score" class="text-xl font-black text-amber-900">1000 / 1000</span>
+                    </div>
+                    <div class="bg-emerald-50 p-3 rounded-xl border border-emerald-200">
+                        <span class="block text-xs text-emerald-800 font-bold">Jawaban Benar</span>
+                        <span id="cert-correct" class="text-xl font-black text-emerald-900">50 / 50</span>
+                    </div>
+                </div>
+
+                <!-- Date & Developer Info -->
+                <div class="flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 border-t pt-4 gap-2">
+                    <div>Tanggal: <strong id="cert-date" class="text-slate-800">22 September 2026</strong></div>
+                    <div>Pengembang: <strong class="text-blue-900">Giga Inovation | 081329200985</strong></div>
+                </div>
+
+                <!-- Print/Download Button -->
+                <div class="mt-6">
+                    <button onclick="window.print()" class="px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold rounded-xl shadow-md hover:from-emerald-700 hover:to-teal-700 transition flex items-center justify-center gap-2 mx-auto">
+                        <i class="fa-solid fa-print"></i> Cetak / Simpan Sertifikat
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer Developer Identity -->
+    <footer class="mt-6 text-center text-xs text-white/80 font-medium">
+        Pengembang: Giga Inovation | 081329200985
+    </footer>
+
+    <script>
+        // --- STATE MANAGEMENT ---
+        let studentName = "";
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let correctCount = 0;
+        let incorrectCount = 0;
+        let previousPageBeforeMateri = 'map';
+
+        // --- DATABASE MATERI KELAS 6 SEMESTER 1 ---
+        const materiData = {
+            1: {
+                title: "Bab 1: Eksplorasi Gerak",
+                icon: "fa-person-running",
+                color: "from-blue-500 to-indigo-600",
+                content: `
+                    <div class="space-y-4">
+                        <div class="bg-blue-50 p-4 rounded-2xl border-l-4 border-blue-500">
+                            <h4 class="font-bold text-blue-900 text-base mb-1">🏃 Konsep Dasar Eksplorasi Gerak</h4>
+                            <p class="text-xs sm:text-sm text-slate-700">Eksplorasi gerak adalah proses mencoba berbagai cara melakukan gerakan tubuh secara kreatif, efektif, dan efisien dalam berbagai bentuk aktivitas fisik dan permainan.</p>
+                        </div>
+                        <div class="bg-cyan-50 p-4 rounded-2xl border-l-4 border-cyan-500">
+                            <h4 class="font-bold text-cyan-900 text-base mb-1">🔄 Variasi dan Kombinasi Gerak Dasar</h4>
+                            <p class="text-xs sm:text-sm text-slate-700">Terdiri dari gerak lokomotor (berpindah tempat seperti berjalan, berlari, melompat), non-lokomotor (mengayun, memutar tanpa berpindah tempat), dan manipulatif (melempar, menangkap, menendang bola).</p>
+                        </div>
+                        <div class="bg-indigo-50 p-4 rounded-2xl border-l-4 border-indigo-500">
+                            <h4 class="font-bold text-indigo-900 text-base mb-1">⚽ Penerapan dalam Permainan Bola Besar & Kecil</h4>
+                            <p class="text-xs sm:text-sm text-slate-700">Kombinasi gerak dasar sangat penting dalam olahraga seperti sepak bola (menendang, menggiring), bola basket (memantulkan, melempar), serta permainan tradisional.</p>
+                        </div>
+                    </div>
+                `
+            },
+            2: {
+                title: "Bab 2: Berpikir Cerdas, Bergerak Taktis",
+                icon: "fa-chess",
+                color: "from-emerald-500 to-teal-600",
+                content: `
+                    <div class="space-y-4">
+                        <div class="bg-emerald-50 p-4 rounded-2xl border-l-4 border-emerald-500">
+                            <h4 class="font-bold text-emerald-900 text-base mb-1">🧠 Pengertian Taktik dan Strategi</h4>
+                            <p class="text-xs sm:text-sm text-slate-700">Taktik adalah suatu siasat atau rencana yang cepat dan cerdas yang diterapkan dalam pertandingan untuk menghadapi lawan dan memenangkan permainan.</p>
+                        </div>
+                        <div class="bg-teal-50 p-4 rounded-2xl border-l-4 border-teal-500">
+                            <h4 class="font-bold text-teal-900 text-base mb-1">👥 Kerjasama Tim dan Posisi Bermain</h4>
+                            <p class="text-xs sm:text-sm text-slate-700">Keberhasilan taktis tidak hanya bergantung pada kemampuan individu, melainkan komunikasi yang baik, pembagian peran (penyerang, bertahan), serta pemanfaatan ruang kosong di lapangan.</p>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-2xl border-l-4 border-green-500">
+                            <h4 class="font-bold text-green-900 text-base mb-1">⚡ Pengambilan Keputusan Cepat</h4>
+                            <p class="text-xs sm:text-sm text-slate-700">Atlet yang cerdas mampu membaca situasi permainan dalam hitungan detik—apakah harus mengoper bola, mengecoh lawan, atau melakukan tembakan ke sasaran.</p>
+                        </div>
+                    </div>
+                `
+            },
+            3: {
+                title: "Bab 3: Aturan Baru, Permainan Seru",
+                icon: "fa-award",
+                color: "from-purple-600 to-pink-600",
+                content: `
+                    <div class="space-y-4">
+                        <div class="bg-purple-50 p-4 rounded-2xl border-l-4 border-purple-500">
+                            <h4 class="font-bold text-purple-900 text-base mb-1">🏆 Modifikasi Aturan Permainan</h4>
+                            <p class="text-xs sm:text-sm text-slate-700">Modifikasi aturan dilakukan untuk menyesuaikan tingkat kemampuan peserta didik, menciptakan suasana yang lebih inklusif, adil, aman, dan meningkatkan keseruan bermain.</p>
+                        </div>
+                        <div class="bg-pink-50 p-4 rounded-2xl border-l-4 border-pink-500">
+                            <h4 class="font-bold text-pink-900 text-base mb-1">🤝 Sportivitas dan Fair Play</h4>
+                            <p class="text-xs sm:text-sm text-slate-700">Kepatuhan terhadap wasit, menghormati lawan, mengakui keunggulan tim lain, serta menerima kekalahan atau kemenangan dengan bijak adalah inti dari setiap aturan permainan.</p>
+                        </div>
+                        <div class="bg-indigo-50 p-4 rounded-2xl border-l-4 border-indigo-500">
+                            <h4 class="font-bold text-indigo-900 text-base mb-1">⚖️ Peran Wasit dan Penegakan Aturan</h4>
+                            <p class="text-xs sm:text-sm text-slate-700">Wasit memimpin jalannya pertandingan dengan adil menggunakan peluit dan isyarat tangan sesuai ketentuan yang disepakati bersama dalam peraturan baru.</p>
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        // --- 50 TOTAL QUESTIONS (Bab 1: 17, Bab 2: 16, Bab 3: 17) ---
+        const questions = [
+            // --- BAB 1: EKSPLORASI GERAK (17 Soal) ---
+            {
+                chapter: 1,
+                difficulty: "🟢 Mudah",
+                text: "Apa yang dimaksud dengan eksplorasi gerak dalam pembelajaran PJOK?",
+                options: [
+                    "Proses mencoba berbagai cara melakukan gerakan tubuh secara kreatif",
+                    "Cara duduk yang paling benar saat di kelas",
+                    "Hanya berlari kencang tanpa aturan",
+                    "Teknik tidur yang nyenyak setelah berolahraga"
+                ],
+                correct: 0,
+                explanation: "Eksplorasi gerak adalah proses eksplorasi dan percobaan berbagai variasi gerak tubuh secara kreatif, efektif, dan efisien."
+            },
+            {
+                chapter: 1,
+                difficulty: "🟢 Mudah",
+                text: "Gerakan berjalan, berlari, dan melompat termasuk ke dalam kelompok gerak...",
+                options: [
+                    "Lokomotor",
+                    "Non-lokomotor",
+                    "Manipulatif",
+                    "Statis"
+                ],
+                correct: 0,
+                explanation: "Gerak lokomotor adalah gerak dasar berpindah tempat dari satu posisi ke posisi lain seperti berjalan dan berlari."
+            },
+            {
+                chapter: 1,
+                difficulty: "🟢 Mudah",
+                text: "Mengayunkan lengan dan memutar pinggang tanpa berpindah tempat dinamakan gerak...",
+                options: [
+                    "Lokomotor",
+                    "Non-lokomotor",
+                    "Manipulatif",
+                    "Akrobatik"
+                ],
+                correct: 1,
+                explanation: "Gerak non-lokomotor adalah gerakan yang dilakukan tanpa disertai perpindahan tempat."
+            },
+            {
+                chapter: 1,
+                difficulty: "🟡 Sedang",
+                text: "Melempar, menangkap, dan menendang bola dalam permainan olahraga dikategorikan sebagai gerak...",
+                options: [
+                    "Lokomotor",
+                    "Non-lokomotor",
+                    "Manipulatif",
+                    "Refleks"
+                ],
+                correct: 2,
+                explanation: "Gerak manipulatif melibatkan penguasaan terhadap suatu objek atau alat, seperti bola, raket, atau simpai."
+            },
+            {
+                chapter: 1,
+                difficulty: "🟡 Sedang",
+                text: "Dalam permainan bola besar seperti sepak bola, kombinasi gerak apa yang dominan dilakukan pemain saat menggiring bola?",
+                options: [
+                    "Lokomotor dan manipulatif",
+                    "Non-lokomotor saja",
+                    "Hanya berdiri diam",
+                    "Melompat tanpa arah"
+                ],
+                correct: 0,
+                explanation: "Menggiring bola menggabungkan gerak berpindah tempat (berlari/lokomotor) dan penguasaan bola (manipulatif)."
+            },
+            {
+                chapter: 1,
+                difficulty: "🟢 Mudah",
+                text: "Sebelum melakukan eksplorasi gerak inti yang berat, hal wajib yang harus dilakukan agar terhindar dari cedera adalah...",
+                options: [
+                    "Langsung tidur",
+                    "Pemanasan (warming up)",
+                    "Makan makanan berat",
+                    "Minum es batu"
+                ],
+                correct: 1,
+                explanation: "Pemanasan sangat penting untuk menaikkan suhu tubuh dan melemaskan otot sebelum beraktivitas."
+            },
+            {
+                chapter: 1,
+                difficulty: "🟡 Sedang",
+                text: "Perhatikan gerakan berikut: Berlari cepat lalu melakukan tolakan pada satu kaki untuk melewati rintangan. Gerakan ini disebut...",
+                options: [
+                    "Melompat / Loncat jauh",
+                    "Mengguling ke depan",
+                    "Duduk bersila",
+                    "Mendorong dinding"
+                ],
+                correct: 0,
+                explanation: "Melompat atau melayang di udara melewati rintangan merupakan kombinasi lari dan tolakan kaki yang eksplosif."
+            },
+            {
+                chapter: 1,
+                difficulty: "🔴 Menantang",
+                text: "Mengapa penting bagi siswa kelas 6 untuk menguasai variasi dan kombinasi gerak dasar dengan baik?",
+                options: [
+                    "Agar menjadi atlet profesional saja",
+                    "Sebagai landasan penting untuk menguasai berbagai cabang olahraga kompleks",
+                    "Supaya bisa pamer kepada teman",
+                    "Agar tidak perlu belajar lagi"
+                ],
+                correct: 1,
+                explanation: "Penguasaan gerak dasar yang matang menjadi modal dasar dalam melakukan teknik lanjutan di berbagai cabang olahraga."
+            },
+            {
+                chapter: 1,
+                difficulty: "🟡 Sedang",
+                text: "Saat melakukan gerakan mendarat setelah melompat, posisi lutut yang benar adalah...",
+                options: [
+                    "Lurus kaku agar cepat berdiri",
+                    "Tekuk (mengeper) untuk meredam benturan",
+                    "Disilangkan ke belakang",
+                    "Dibiarkan lemas terjatuh"
+                ],
+                correct: 1,
+                explanation: "Lutut harus ditekuk atau mengeper saat mendarat guna menyerap goncangan dan melindungi persendian."
+            },
+            {
+                chapter: 1,
+                difficulty: "🟢 Mudah",
+                text: "Aktivitas membungkukkan badan ke depan untuk menyentuh ujung kaki melatih kelenturan otot bagian...",
+                options: [
+                    "Punggung dan kaki belakang",
+                    "Leher dan jari tangan",
+                    "Mata dan telinga",
+                    "Gigi dan rahang"
+                ],
+                correct: 0,
+                explanation: "Gerakan ini berfokus pada peregangan otot punggung bawah serta otot hamstring (kaki belakang)."
+            },
+            {
+                chapter: 1,
+                difficulty: "🟡 Sedang",
+                text: "Manakah di bawah ini yang merupakan contoh kombinasi gerak lokomotor dan manipulatif dalam bola basket?",
+                options: [
+                    "Berdiri diam memegang bola",
+                    "Berlari sambil memantulkan bola (dribble)",
+                    "Duduk di bangku cadangan",
+                    "Melipat tangan di dada"
+                ],
+                correct: 1,
+                explanation: "Dribble bola basket menggabungkan perpindahan tempat (berlari) dengan memantulkan bola menggunakan tangan."
+            },
+            {
+                chapter: 1,
+                difficulty: "🔴 Menantang",
+                text: "Dalam eksplorasi gerak lokomotor, bentuk langkah kaki dapat divariasikan menjadi langkah biasa, langkah rapat, dan langkah...",
+                options: [
+                    "Langkah tidur",
+                    "Langkah keseimbangan (lop)",
+                    "Langkah malas",
+                    "Langkah terbang tanpa gravitasi"
+                ],
+                correct: 1,
+                explanation: "Langkah keseimbangan (lop) adalah salah satu variasi langkah dalam aktivitas ritmik maupun eksplorasi gerak."
+            },
+            {
+                chapter: 1,
+                difficulty: "🟢 Mudah",
+                text: "Alat bantu latihan yang sering digunakan untuk menandai batas lari atau rintangan kelincahan disebut...",
+                options: [
+                    "Cone (kerucut latihan)",
+                    "Gantungan baju",
+                    "Buku tulis",
+                    "Sendok makan"
+                ],
+                correct: 0,
+                explanation: "Cone atau kerucut latihan sangat populer digunakan dalam PJOK untuk latihan kelincahan dan pembatas area."
+            },
+            {
+                chapter: 1,
+                difficulty: "🟡 Sedang",
+                text: "Bagaimana cara melakukan lemparan bola melambung ke atas dengan benar?",
+                options: [
+                    "Melempar ke arah tanah dengan keras",
+                    "Mengayunkan tangan dari bawah ke atas dengan sudut kemiringan tertentu",
+                    "Menjatuhkan bola di kaki teman",
+                    "Melempar ke belakang tanpa melihat"
+                ],
+                correct: 1,
+                explanation: "Lemparan melambung memerlukan ayunan tangan dari bawah ke atas agar bola melayang jauh di udara."
+            },
+            {
+                chapter: 1,
+                difficulty: "🟢 Mudah",
+                text: "Gerakan berputar di tempat pada satu poros kaki disebut...",
+                options: [
+                    "Pivot",
+                    "Sprinting",
+                    "Dribbling",
+                    "Passing"
+                ],
+                correct: 0,
+                explanation: "Pivot adalah gerakan memutar badan dengan salah satu kaki sebagai poros pertahanan (sering di basket)."
+            },
+            {
+                chapter: 1,
+                difficulty: "🟡 Sedang",
+                text: "Saat menangkap bola yang datang dari arah depan, posisi kedua tangan sebaiknya...",
+                options: [
+                    "Dilear ke belakang kepala",
+                    "Menyongsong arah datangnya bola dengan jemari rileks membentuk mangkuk",
+                    "Dikepal erat di samping badan",
+                    "Ditutup menggunakan mata"
+                ],
+                correct: 1,
+                explanation: "Tangan dibentuk seperti mangkuk terbuka untuk menyambut bola dan meredam lajunya agar tidak lepas."
+            },
+            {
+                chapter: 1,
+                difficulty: "🔴 Menantang",
+                text: "Eksplorasi gerak berirama (senam lantai/irama) menekankan pada keserasian antara...",
+                    options: [
+                    "Gerakan tubuh dengan ketukan irama atau musik",
+                    "Kecepatan makan dengan minum",
+                    "Warna pakaian dengan warna sepatu",
+                    "Jumlah teman dengan jumlah bola"
+                ],
+                correct: 0,
+                explanation: "Senam irama atau gerak berirama sangat mengutamakan kesesuaian gerak dengan ketukan/ritme."
+            },
+
+            // --- BAB 2: BERPIKIR CERDAS, BERGERAK TAKTIS (16 Soal) ---
+            {
+                chapter: 2,
+                difficulty: "🟢 Mudah",
+                text: "Apa arti dari bermain secara taktis dalam suatu pertandingan olahraga?",
+                options: [
+                    "Bermain dengan menggunakan strategi, kecerdasan, dan kerjasama tim",
+                    "Bermain sendiri tanpa mempedulikan teman",
+                    "Berlari sekencang-kencangnya tanpa arah",
+                    "Protes terus kepada wasit"
+                ],
+                correct: 0,
+                explanation: "Taktik melibatkan pemikiran cerdas, pengaturan posisi, dan siasat tim untuk menaklukkan lawan secara sportif."
+            },
+            {
+                chapter: 2,
+                difficulty: "🟡 Sedang",
+                text: "Dalam situasi permainan sepak bola menyerang, apa yang harus dilakukan pemain saat melihat rekan satu tim berada di ruang kosong tanpa penjagaan?",
+                options: [
+                    "Segera mengoper bola ke rekan tersebut",
+                    "Mendiamkan saja dan membawa bola sendiri sampai direbut",
+                    "Menendang bola ke luar lapangan",
+                    "Duduk di rumput"
+                ],
+                correct: 0,
+                explanation: "Memanfaatkan ruang kosong dengan memberikan operan akurat adalah contoh berpikir taktis."
+            },
+            {
+                chapter: 2,
+                difficulty: "🟢 Mudah",
+                text: "Papan strategi atau taktik pelatih biasanya digunakan untuk...",
+                options: [
+                    "Menggambar pemandangan alam",
+                    "Menjelaskan formasi dan cara menyerang/bertahan kepada pemain",
+                    "Menghitung jumlah penonton",
+                    "Menimbang berat bola"
+                ],
+                correct: 1,
+                explanation: "Papan strategi membantu visualisasi formasi dan pembagian tugas pemain di lapangan."
+            },
+            {
+                chapter: 2,
+                difficulty: "🟡 Sedang",
+                text: "Manakah sikap yang menunjukkan kecerdasan taktis dalam bertahan (defense)?",
+                options: [
+                    "Menutup ruang tembak lawan dan menjaga pemain penyerang dengan sigap",
+                    "Meninggalkan gawang kosong",
+                    "Menunggu lawan mencetak gol",
+                    "Berjalan-jalan santai di area sendiri"
+                ],
+                correct: 0,
+                explanation: "Bertahan yang cerdas menuntut pemain disiplin menutup ruang gerak lawan dan menjaga area pertahanan."
+            },
+            {
+                chapter: 2,
+                difficulty: "🔴 Menantang",
+                text: "Ketika tim kamu tertinggal skor menjelang akhir pertandingan, strategi taktis apa yang umumnya diterapkan?",
+                options: [
+                    "Bermain lebih menyerang dengan risiko tinggi",
+                    "Semua pemain tidur di lapangan",
+                    "Menghentikan pertandingan",
+                    "Keluar lapangan tanpa izin"
+                ],
+                correct: 0,
+                explanation: "Strategi ofensif total (menyerang) sering dipilih saat tertinggal di menit-menit akhir."
+            },
+            {
+                chapter: 2,
+                difficulty: "🟢 Mudah",
+                text: "Komunikasi antar pemain di lapangan sangat penting agar...",
+                options: [
+                    "Pertandingan menjadi gaduh",
+                    "Kerjasama tim berjalan lancar dan tidak salah oper bola",
+                    "Wasit memberikan kartu kuning",
+                    "Penonton tertawa"
+                ],
+                correct: 1,
+                explanation: "Komunikasi yang efektif menciptakan koordinasi tim yang padu dalam menyerang maupun bertahan."
+            },
+            {
+                chapter: 2,
+                difficulty: "🟡 Sedang",
+                text: "Apa yang dimaksud dengan 'membaca situasi permainan' bagi seorang atlet muda?",
+                options: [
+                    "Membaca buku cerita di pinggir lapangan",
+                    "Mengamati posisi kawan dan lawan secara cepat untuk mengambil keputusan tepat",
+                    "Melihat cuaca hari ini",
+                    "Menghitung jumlah bola di keranjang"
+                ],
+                correct: 1,
+                explanation: "Membaca situasi berarti peka terhadap pergerakan di sekitar lapangan untuk menentukan langkah selanjutnya."
+            },
+            {
+                chapter: 2,
+                difficulty: "🔴 Menantang",
+                text: "Dalam permainan invasi (seperti bola tangan atau basket), mengapa penguasaan ruang (space) sangat krusial?",
+                options: [
+                    "Agar lapangan terlihat luas",
+                    "Karena ruang terbuka memudahkan pemain menerima operan dan mencetak poin",
+                    "Supaya bisa istirahat di tempat teduh",
+                    "Tidak ada gunanya sama sekali"
+                ],
+                correct: 1,
+                explanation: "Menciptakan dan memanfaatkan ruang kosong adalah kunci utama keberhasilan menembus pertahanan lawan."
+            },
+            {
+                chapter: 2,
+                difficulty: "🟢 Mudah",
+                text: "Jika teman satu tim sedang dikeroyok oleh tiga pemain lawan, tindakan cerdas yang harus kamu lakukan adalah...",
+                options: [
+                    "Menonton dari jauh",
+                    "Mendekat untuk memberikan opsi operan (menjemput bola)",
+                    "Meneriaki teman",
+                    "Meninggalkan lapangan"
+                ],
+                correct: 1,
+                explanation: "Mendekat untuk memberi dukungan operan membantu melepaskan teman dari tekanan lawan."
+            },
+            {
+                chapter: 2,
+                difficulty: "🟡 Sedang",
+                text: "Mengapa keputusan cepat dan tepat sangat dihargai dalam olahraga beregu?",
+                options: [
+                    "Karena waktu pertandingan sangat terbatas dan situasi berubah cepat",
+                    "Biar cepat pulang ke rumah",
+                    "Supaya tidak berkeringat",
+                    "Agar wasit bingung"
+                ],
+                correct: 0,
+                explanation: "Situasi pertandingan olahraga sangat dinamis, sehingga keputusan sepersekian detik menentukan hasil."
+            },
+            {
+                chapter: 2,
+                difficulty: "🟢 Mudah",
+                text: "Dalam menyusun taktik regu, peran kapten tim adalah...",
+                options: [
+                    "Memimpin rekan-rekan dan menjadi penghubung di lapangan",
+                    "Menjadi penonton paling spesial",
+                    "Menentukan skor akhir sebelum bertanding",
+                    "Mengatur konsumsi makanan"
+                ],
+                correct: 0,
+                explanation: "Kapten bertindak sebagai pemimpin di lapangan yang mengkoordinasi semangat dan strategi tim."
+            },
+            {
+                chapter: 2,
+                difficulty: "🟡 Sedang",
+                text: "Manakah contoh penerapan taktik 'menghadang laju lawan' dalam permainan bola besar?",
+                options: [
+                    "Melakukan pressing ketat tanpa melakukan pelanggaran keras",
+                    "Menendang kaki lawan dengan sengaja",
+                    "Mendorong wasit",
+                    "Duduk di depan gawang"
+                ],
+                correct: 0,
+                explanation: "Pressing ketat secara sportif adalah taktik efektif untuk merebut kembali penguasaan bola."
+            },
+            {
+                chapter: 2,
+                difficulty: "🔴 Menantang",
+                text: "Bagaimana cara mengevaluasi apakah taktik yang digunakan dalam pertandingan sudah berhasil atau belum?",
+                options: [
+                    "Melihat efektivitas serangan, penguasaan bola, dan perolehan skor",
+                    "Berdasarkan seberapa lelah pemain",
+                    "Berdasarkan warna seragam tim",
+                    "Berdasarkan jumlah penonton yang hadir"
+                ],
+                correct: 0,
+                explanation: "Evaluasi taktik dilihat dari hasil nyata di lapangan seperti efisiensi serangan dan skor."
+            },
+            {
+                chapter: 2,
+                difficulty: "🟢 Mudah",
+                text: "Sikap mental apa yang harus dimiliki pemain saat strategi timnya gagal di awal babak?",
+                options: [
+                    "Menyerah dan ngambek",
+                    "Tetap tenang, berdiskusi, dan mengubah strategi bersama pelatih",
+                    "Marahi semua teman satu tim",
+                    "Pulang ke rumah"
+                ],
+                correct: 1,
+                explanation: "Ketenangan dan kemauan beradaptasi adalah ciri atlet cerdas."
+            },
+            {
+                chapter: 2,
+                difficulty: "🟡 Sedang",
+                text: "Mengapa pemanasan taktis sebelum pertandingan (seperti simulasi situasi game) sangat dianjurkan?",
+                options: [
+                    "Agar pemain siap secara mental dan refleks merespons situasi nyata",
+                    "Biar cepat haus",
+                    "Menghabiskan waktu luang",
+                    "Syarat wajib dari penonton"
+                ],
+                correct: 0,
+                explanation: "Simulasi situasi game melatih otak dan otot agar terbiasa dengan pola permainan."
+            },
+            {
+                chapter: 2,
+                difficulty: "🔴 Menantang",
+                text: "Dalam transisi dari menyerang ke bertahan (counter-attack defense), hal terpenting yang harus dilakukan tim adalah...",
+                    options: [
+                    "Segera kembali ke posisi bertahan untuk menutup area",
+                    "Bertepuk tangan untuk lawan",
+                    "Menunggu wasit meniup peluit",
+                    "Protes keputusan wasit"
+                ],
+                correct: 0,
+                explanation: "Transisi cepat kembali ke posisi bertahan mencegah lawan melakukan serangan balik leluasa."
+            },
+
+            // --- BAB 3: ATURAN BARU, PERMAINAN SERU (17 Soal) ---
+            {
+                chapter: 3,
+                difficulty: "🟢 Mudah",
+                text: "Apa tujuan utama diadakannya modifikasi aturan dalam suatu permainan olahraga sekolah?",
+                options: [
+                    "Agar permainan lebih rumit dan membingungkan",
+                    "Agar permainan lebih aman, seru, adil, dan sesuai kemampuan siswa",
+                    "Supaya tidak ada yang bisa menang",
+                    "Agar durasi pertandingan menjadi 5 jam"
+                ],
+                correct: 1,
+                explanation: "Modifikasi aturan bertujuan menyesuaikan tingkat kesulitan dan keamanan agar semua siswa dapat menikmati permainan."
+            },
+            {
+                chapter: 3,
+                difficulty: "🟢 Mudah",
+                text: "Siapa pemimpin jalannya pertandingan di lapangan yang bertugas menegakkan aturan secara adil?",
+                options: [
+                    "Wasit / Guru PJOK",
+                    "Penonton di tribun",
+                    "Suporter setia",
+                    "Fotografer"
+                ],
+                correct: 0,
+                explanation: "Wasit adalah pengadil lapangan yang memastikan aturan dipatuhi oleh seluruh pemain."
+            },
+            {
+                chapter: 3,
+                difficulty: "🟡 Sedang",
+                text: "Apa tanda yang biasanya digunakan oleh wasit untuk memulai atau menghentikan pertandingan?",
+                options: [
+                    "Tiupan peluit",
+                    "Menyalakan kembang api",
+                    "Bertepuk tangan",
+                    "Membunyikan lonceng gereja"
+                ],
+                correct: 0,
+                explanation: "Peluit adalah alat komunikasi utama wasit di lapangan."
+            },
+            {
+                chapter: 3,
+                difficulty: "🟢 Mudah",
+                text: "Sikap sportif (fair play) dalam sebuah pertandingan tercermin dari perilaku...",
+                options: [
+                    "Menghormati lawan dan menerima keputusan wasit dengan lapang dada",
+                    "Curang agar bisa menang dengan cara apa pun",
+                    "Mengejek tim yang kalah",
+                    "Marah-marah saat mendapat kartu"
+                ],
+                correct: 0,
+                explanation: "Fair play menjunjung tinggi kejujuran, penghargaan pada lawan, dan kepatuhan aturan."
+            },
+            {
+                chapter: 3,
+                difficulty: "🟡 Sedang",
+                text: "Jika dalam modifikasi permainan bola voli sekolah, aturan ditambah dengan 'boleh menangkap bola satu kali sebelum dioper', apa dampak positifnya?",
+                    options: [
+                    "Permainan menjadi lebih mudah dikuasai dan reli bola lebih panjang",
+                    "Permainan langsung berhenti total",
+                    "Wasit kebingungan",
+                    "Bola menjadi rusak"
+                ],
+                correct: 0,
+                explanation: "Modifikasi tersebut membantu pemula agar lebih mudah menikmati keseruan voli."
+            },
+            {
+                chapter: 3,
+                difficulty: "🟢 Mudah",
+                text: "Alat untuk mencatat perolehan angka atau gol dari kedua tim yang bertanding dinamakan...",
+                options: [
+                    "Papan skor (score board)",
+                    "Papan tulis kelas",
+                    "Kalender dinding",
+                    "Buku absensi"
+                ],
+                correct: 0,
+                explanation: "Papan skor menampilkan jumlah gol/poin secara transparan."
+            },
+            {
+                chapter: 3,
+                difficulty: "🟡 Sedang",
+                text: "Bagaimana sikap yang benar saat tim kamu mengalami kekalahan dalam pertandingan yang seru?",
+                options: [
+                    "Mengucapkan selamat kepada tim pemenang dan tetap semangat berlatih",
+                    "Menuduh wasit curang tanpa bukti",
+                    "Menangis histeris sepanjang hari",
+                    "Merusak fasilitas lapangan"
+                ],
+                correct: 0,
+                explanation: "Menerima kekalahan dengan kesatria adalah cerminan karakter atlet sejati."
+            },
+            {
+                chapter: 3,
+                difficulty: "🔴 Menantang",
+                text: "Mengapa modifikasi ukuran lapangan atau jumlah pemain sering diterapkan dalam pembelajaran PJOK di sekolah dasar?",
+                options: [
+                    "Agar keterlibatan aktif setiap siswa meningkat dan sesuai kondisi sekolah",
+                    "Karena guru malas membuat lapangan standar",
+                    "Supaya tidak ada yang berkeringat",
+                    "Agar penonton tidakjuban"
+                ],
+                correct: 0,
+                explanation: "Modifikasi fasilitas memastikan semua anak mendapat kesempatan bergerak maksimal."
+            },
+            {
+                chapter: 3,
+                difficulty: "🟢 Mudah",
+                text: "Kartu peringatan apa yang umumnya diberikan wasit kepada pemain yang melakukan pelanggaran keras?",
+                options: [
+                    "Kartu kuning dan kartu merah",
+                    "Kartu ATM dan kartu kredit",
+                    "Kartu pos dan kartu ucapan",
+                    "Kartu pelajar"
+                ],
+                correct: 0,
+                explanation: "Dalam banyak olahraga, kartu kuning adalah peringatan dan kartu merah berarti pengusiran."
+            },
+            {
+                chapter: 3,
+                difficulty: "🟡 Sedang",
+                text: "Apa yang dimaksud dengan aturan 'handsball' dalam permainan sepak bola?",
+                options: [
+                    "Pemain dengan sengaja menyentuh bola menggunakan tangan/lengan",
+                    "Pemain mencuci tangan sebelum bertanding",
+                    "Pemain berjabat tangan dengan wasit",
+                    "Menangkap bola menggunakan keranjang"
+                ],
+                correct: 0,
+                explanation: "Handsball adalah pelanggaran ketika pemain (selain penjaga gawang di area) menyentuh bola dengan tangan."
+            },
+            {
+                chapter: 3,
+                difficulty: "🔴 Menantang",
+                text: "Dalam sebuah permainan invasi yang dimodifikasi, aturan baru diberlakukan: 'Setiap anggota tim harus menyentuh bola sebelum boleh mencetak gol.' Apa tujuan aturan ini?",
+                options: [
+                    "Mendorong kerjasama tim yang merata dan mencegah pemain egois",
+                    "Membuat pertandingan berjalan sangat lambat",
+                    "Menyulitkan wasit menghitung skor",
+                    "Agar bola cepat kempes"
+                ],
+                correct: 0,
+                explanation: "Aturan tersebut melatih kolaborasi dan keterlibatan seluruh anggota tim secara adil."
+            },
+            {
+                chapter: 3,
+                difficulty: "🟢 Mudah",
+                text: "Sebelum pertandingan dimulai, kedua kapten tim biasanya melakukan...",
+                options: [
+                    "Undian koin (koin toss) untuk memilih tempat atau bola pertama",
+                    "Lomba lari cepat 100 meter",
+                    "Menyanyi lagu kebangsaan dua kali",
+                    "Makan bersama di kantin"
+                ],
+                correct: 0,
+                explanation: "Koin toss adalah prosedur standar penentuan awal pertandingan secara adil."
+            },
+            {
+                chapter: 3,
+                difficulty: "🟡 Sedang",
+                text: "Mengapa kita tidak boleh memprotes keputusan wasit secara berlebihan di lapangan?",
+                options: [
+                    "Karena keputusan wasit bersifat mutlak di lapangan dan protes berlebih merusak sportivitas",
+                    "Karena wasit selalu salah",
+                    "Biar mendapat hadiah dari wasit",
+                    "Agar pertandingan cepat selesai"
+                ],
+                correct: 0,
+                explanation: "Menghormati pengadil lapangan adalah pilar utama dalam etika berolahraga."
+            },
+            {
+                chapter: 3,
+                difficulty: "🟢 Mudah",
+                text: "Simbol penghargaan yang diberikan kepada juara pertama setelah kompetisi selesai adalah...",
+                options: [
+                    "Medali emas dan piala (trofi)",
+                    "Sertifikat kosong",
+                    "Sepatu kotor",
+                    "Botol air mineral kosong"
+                ],
+                correct: 0,
+                explanation: "Medali dan trofi adalah simbol prestasi kemenangan dalam kejuaraan."
+            },
+            {
+                chapter: 3,
+                difficulty: "🟡 Sedang",
+                text: "Apa manfaat dari menerapkan aturan keselamatan (safety rules) yang ketat dalam permainan olahraga?",
+                options: [
+                    "Mencegah terjadinya cedera fatal dan melindungi kesehatan peserta didik",
+                    "Membatasi keseruan bermain",
+                    "Membuat permainan terasa membosankan",
+                    "Agar tidak ada yang berkeringat"
+                ],
+                correct: 0,
+                explanation: "Keselamatan selalu menjadi prioritas utama dalam setiap aktivitas fisik PJOK."
+            },
+            {
+                chapter: 3,
+                difficulty: "🔴 Menantang",
+                text: "Dalam modifikasi permainan tradisional anak, jika aturan lama dirasa kurang menantang untuk anak kelas 6, langkah yang tepat adalah...",
+                options: [
+                    "Menambahkan rintangan atau memperkecil area permainan atas kesepakatan bersama",
+                    "Menghentikan permainan selamanya",
+                    "Memarahi pembuat permainan",
+                    "Bermain tanpa aturan sama sekali"
+                ],
+                correct: 0,
+                explanation: "Modifikasi progresif dapat dilakukan untuk meningkatkan tantangan sesuai perkembangan usia."
+            },
+            {
+                chapter: 3,
+                difficulty: "🟡 Sedang",
+                text: "Bagaimana bentuk perayaan kemenangan yang menjunjung tinggi nilai sportivitas?",
+                options: [
+                    "Bersyukur dan tetap menghormati tim lawan yang belum beruntung",
+                    "Mengejek tim lawan di media sosial",
+                    "Menertawakan suporter lawan",
+                    "Menolak berjabat tangan seusai laga"
+                ],
+                correct: 0,
+                explanation: "Kemenangan yang baik dirayakan dengan rendah hati dan rasa hormat kepada lawan."
+            }
+        ];
+
+        // --- CORE GAME FUNCTIONS ---
+
+        function startAdventure() {
+            const inputVal = document.getElementById('student-name-input').value.trim();
+            if (!inputVal) {
+                alert("Halo Atlet! Silakan masukkan nama kamu terlebih dahulu ya.");
+                return;
+            }
+            studentName = inputVal;
+            document.getElementById('greeting-text').innerText = `Halo, ${studentName}!`;
+            document.getElementById('quiz-name-display').innerText = studentName;
+
+            // Audio speech simulation check
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(`Halo, ${studentName}! Selamat datang di Petualangan PJOK Kelas 6. Ayo menjadi juara!`);
+                utterance.lang = 'id-ID';
+                window.speechSynthesis.speak(utterance);
+            }
+
+            // Transition pages
+            document.getElementById('page-welcome').classList.add('hidden');
+            document.getElementById('page-map').classList.remove('hidden');
+        }
+
+        function openChapter(chapterNum) {
+            previousPageBeforeMateri = 'map';
+            const mat = materiData[chapterNum];
+            document.getElementById('materi-title').innerText = mat.title;
+            document.getElementById('materi-icon-box').innerHTML = `<i class="fa-solid ${mat.icon}"></i>`;
+            document.getElementById('materi-content-box').innerHTML = mat.content;
+
+            document.getElementById('page-map').classList.add('hidden');
+            document.getElementById('page-materi').classList.remove('hidden');
+        }
+
+        function openMateriFromQuiz() {
+            previousPageBeforeMateri = 'quiz';
+            // Find current question chapter
+            const q = questions[currentQuestionIndex];
+            const mat = materiData[q.chapter];
+            document.getElementById('materi-title').innerText = mat.title;
+            document.getElementById('materi-icon-box').innerHTML = `<i class="fa-solid ${mat.icon}"></i>`;
+            document.getElementById('materi-content-box').innerHTML = mat.content;
+
+            document.getElementById('page-quiz').classList.add('hidden');
+            document.getElementById('page-materi').classList.remove('hidden');
+        }
+
+        function backToMap() {
+            document.getElementById('page-materi').classList.add('hidden');
+            document.getElementById('page-map').classList.remove('hidden');
+        }
+
+        function resumeQuiz() {
+            document.getElementById('page-materi').classList.add('hidden');
+            if (previousPageBeforeMateri === 'quiz') {
+                document.getElementById('page-quiz').classList.remove('hidden');
+            } else {
+                document.getElementById('page-map').classList.remove('hidden');
+            }
+        }
+
+        function startQuizFromBeginning() {
+            currentQuestionIndex = 0;
+            score = 0;
+            correctCount = 0;
+            incorrectCount = 0;
+            document.getElementById('page-map').classList.add('hidden');
+            document.getElementById('page-quiz').classList.remove('hidden');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            if (currentQuestionIndex >= questions.length) {
+                endQuiz();
+                return;
+            }
+
+            const q = questions[currentQuestionIndex];
+            
+            // Update Top Bar
+            document.getElementById('quiz-progress-text').innerText = `SOAL ${currentQuestionIndex + 1} DARI 50`;
+            document.getElementById('quiz-score-display').innerText = score;
+            document.getElementById('quiz-level-display').innerText = `Bab ${q.chapter}`;
+            document.getElementById('question-difficulty-badge').innerText = q.difficulty;
+
+            // Progress Bar width percentage
+            const progressPct = ((currentQuestionIndex + 1) / 50) * 100;
+            document.getElementById('quiz-progress-bar').style.width = `${progressPct}%`;
+
+            // Question Text
+            document.getElementById('question-text').innerText = q.text;
+
+            // Optional Question Image simulation based on chapter
+            const imgContainer = document.getElementById('question-image-container');
+            if (currentQuestionIndex % 5 === 0) {
+                imgContainer.classList.remove('hidden');
+                document.getElementById('question-img-label').innerText = `Ilustrasi Bab ${q.chapter}: ${q.text.substring(0, 35)}...`;
+            } else {
+                imgContainer.classList.add('hidden');
+            }
+
+            // Render Options
+            const optContainer = document.getElementById('options-container');
+            optContainer.innerHTML = '';
+            
+            const letters = ['A', 'B', 'C', 'D'];
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-4 rounded-2xl border-2 border-slate-200 hover:border-cyan-500 hover:bg-cyan-50 font-bold text-sm sm:text-base text-slate-800 transition flex items-center gap-3 shadow-sm cursor-pointer active:scale-[0.99]";
+                btn.innerHTML = `<span class="w-8 h-8 bg-cyan-100 text-cyan-800 rounded-xl flex items-center justify-center font-black text-sm flex-shrink-0">${letters[idx]}</span><span>${opt}</span>`;
+                btn.onclick = () => selectAnswer(idx);
+                optContainer.appendChild(btn);
+            });
+
+            // Hide feedback box
+            document.getElementById('feedback-box').classList.add('hidden');
+            optContainer.classList.remove('pointer-events-none');
+        }
+
+        function selectAnswer(selectedIndex) {
+            const q = questions[currentQuestionIndex];
+            const optContainer = document.getElementById('options-container');
+            optContainer.classList.add('pointer-events-none'); // Disable clicking further
+
+            const buttons = optContainer.getElementsByTagName('button');
+            const feedbackBox = document.getElementById('feedback-box');
+            const feedbackHeader = document.getElementById('feedback-header');
+            const feedbackExplanation = document.getElementById('feedback-explanation');
+
+            const isCorrect = (selectedIndex === q.correct);
+
+            if (isCorrect) {
+                score += 20;
+                correctCount++;
+                buttons[selectedIndex].classList.remove('border-slate-200', 'hover:border-cyan-500', 'hover:bg-cyan-50');
+                buttons[selectedIndex].classList.add('border-emerald-500', 'bg-emerald-100', 'text-emerald-900');
+                
+                feedbackHeader.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 text-xl"></i> <span class="text-emerald-700">✓ BENAR! Hebat, ${studentName}!</span>`;
+                feedbackBox.className = "rounded-2xl p-4 mb-4 border-2 border-emerald-300 bg-emerald-50";
+
+                if ('speechSynthesis' in window) {
+                    const utterance = new SpeechSynthesisUtterance(`Benar, ${studentName}! Hebat sekali!`);
+                    utterance.lang = 'id-ID';
+                    window.speechSynthesis.speak(utterance);
+                }
+            } else {
+                incorrectCount++;
+                buttons[selectedIndex].classList.remove('border-slate-200', 'hover:border-cyan-500', 'hover:bg-cyan-50');
+                buttons[selectedIndex].classList.add('border-rose-500', 'bg-rose-100', 'text-rose-900');
+                
+                // Highlight correct one
+                buttons[q.correct].classList.remove('border-slate-200', 'hover:border-cyan-500', 'hover:bg-cyan-50');
+                buttons[q.correct].classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-900');
+
+                feedbackHeader.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-600 text-xl"></i> <span class="text-rose-700">✗ BELUM TEPAT, ${studentName}!</span>`;
+                feedbackBox.className = "rounded-2xl p-4 mb-4 border-2 border-rose-300 bg-rose-50";
+
+                if ('speechSynthesis' in window) {
+                    const utterance = new SpeechSynthesisUtterance(`Belum tepat, ${studentName}. Yuk pelajari kembali.`);
+                    utterance.lang = 'id-ID';
+                    window.speechSynthesis.speak(utterance);
+                }
+            }
+
+            feedbackExplanation.innerHTML = `<strong>Jawaban yang benar: ${['A','B','C','D'][q.correct]}.</strong><br>${q.explanation}`;
+            feedbackBox.classList.remove('hidden');
+            document.getElementById('quiz-score-display').innerText = score;
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            loadQuestion();
+        }
+
+        function endQuiz() {
+            document.getElementById('page-quiz').classList.add('hidden');
+            document.getElementById('page-result').classList.remove('hidden');
+
+            document.getElementById('result-congrats').innerText = `Selamat, ${studentName}!`;
+            document.getElementById('res-score').innerText = score;
+            document.getElementById('res-correct').innerText = correctCount;
+
+            let categoryTitle = "💪 PEJUANG OLAHRAGA";
+            if (score >= 900) {
+                categoryTitle = "🏆 JUARA PJOK";
+            } else if (score >= 700) {
+                categoryTitle = "🌟 ATLET MUDA HEBAT";
+            }
+            document.getElementById('result-category-title').innerText = categoryTitle;
+
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(`Selamat, ${studentName}! Kamu telah menyelesaikan 50 soal PJOK.`);
+                utterance.lang = 'id-ID';
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function openCertificateModal() {
+            document.getElementById('cert-student-name').innerText = studentName;
+            document.getElementById('cert-score').innerText = `${score} / 1000`;
+            document.getElementById('cert-correct').innerText = `${correctCount} dari 50 soal`;
+            
+            // Format current date in Indonesian
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const todayStr = new Date().toLocaleDateString('id-ID', options);
+            document.getElementById('cert-date').innerText = todayStr;
+
+            document.getElementById('modal-certificate').classList.remove('hidden');
+        }
+
+        function closeCertificateModal() {
+            document.getElementById('modal-certificate').classList.add('hidden');
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            correctCount = 0;
+            incorrectCount = 0;
+            document.getElementById('page-result').classList.add('hidden');
+            document.getElementById('page-quiz').classList.remove('hidden');
+            loadQuestion();
+        }
+    </script>
+</body>
+</html>
